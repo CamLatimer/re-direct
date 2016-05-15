@@ -14,6 +14,18 @@ app.listen(app.get('port'), function(){
 
 var Link = Schema.Link;
 
+app.get('/linke_me_dude', function(req, res){
+  res.send('./public/index.html');
+})
+app.get('/link_me_dude/yo_link/:customizr', function(req, res){
+  res.send('gotcha, here is the link: ' + '<a href="/link_me_dude/'+req.params.customizr+'">link_me_dude/'+req.params.customizr+'</a>');
+});
+app.get('/link_me_dude/:customizr', function(req, res){
+  Link.findOne({customizr: req.params.customizr}, function(err, link){
+    res.redirect(link.input_url);
+  });
+});
+
 app.route('/links')
 .get(function(req, res){
   Link.find({}).then(function(links){
@@ -21,12 +33,12 @@ app.route('/links')
   });
 })
 .post(function(req, res){
-  console.log(req.body);
-  Link.create(req.body).then(function(err, link){
+  Link.create(req.body, function(err, link){
     if(err){
       console.log(err);
     }else{
-      res.send('whoa, you just created: ' + link);
+      console.log('whoa, you just created: ' + link);
+      res.redirect('/link_me_dude/yo_link/' + link.customizr);
     }
   });
 });
