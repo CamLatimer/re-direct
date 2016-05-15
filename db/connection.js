@@ -7,8 +7,12 @@ if(process.env.NODE_ENV == "production"){
 }
 
 var LinkSchema = new mongoose.Schema({
-  input_url: String,
-  customizr: String,
+  created: {
+    type: Date,
+    default: Date.now
+  },
+  input_url: {type: String, required: true},
+  customizr: {type: String, required: true}
 });
 
 module.exports = {
