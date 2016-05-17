@@ -15,6 +15,9 @@ app.listen(app.get('port'), function(){
 // model
 var Link = Schema.Link;
 
+
+
+
 // routing
 
 // home page. express looks for index.html in the root dir when pointed to '/'
@@ -28,7 +31,7 @@ app.route('/links')
     res.json(links);
   });
 })
-// add to link to the db and redirect to
+// add a link to the db and redirect to
 // a page showing the user's new url
 .post(function(req, res){
   Link.create(req.body, function(err, link){
@@ -40,9 +43,11 @@ app.route('/links')
     }
   });
 });
+// shows user their new link
 app.get('/your_link_is/:customizr', function(req, res){
   res.send('gotcha, here is the link: ' + '<a href="/'+req.params.customizr+'">' +'/'+req.params.customizr+'</a>');
 });
+// redirect to the original link
 app.get('/:customizr', function(req, res){
   Link.findOne({customizr: req.params.customizr}, function(err, link){
     res.redirect(link.input_url);
