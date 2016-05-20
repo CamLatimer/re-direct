@@ -22,7 +22,10 @@ function getLink(){
     inputUrl = '';
     customizr = '';
   })
-  .fail(function(jqXHR, textStatus) {
-    alert( "Request failed: " + textStatus );
+  .fail(function(reqObj, textStatus) {
+    console.log(reqObj.status)
+    console.log( "Request failed: " + textStatus );
+    inputUrl.value = '';
+    customizr.value = '';
   });
 }
