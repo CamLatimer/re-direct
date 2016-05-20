@@ -7,16 +7,17 @@
 </head>
 <body>
   <h1>Link Me, Dude!</h1>
-  <form method="POST" action="/links">
+  <form id="link-form">
     <p>URL:</p>
     <input type="text" name="input_url" placeholder="your url">
     <p>Customize:</p>
     <input type="text" name="customizr" placeholder="add a custom tag">
     <p>(Your URL will look like this: http://link_me_dude/"put-funny-custom-tag-here")</p>
     <div>
-      <button type="submit">submit</button>
+      <button id="link-submit" type="submit">submit</button>
     </div>
   </form>
+  <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
   <script src="/js/client.js"></script>
 </body>
 </html>
