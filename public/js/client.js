@@ -1,12 +1,28 @@
-// create request object
-var xhr = new XMLHttpRequest();
+var inputUrl  = document.querySelector("[name='input_url']");
+var customizr = document.querySelector("[name='customizr']");
+var submitBtn = document.getElementById('link-submit');
+
+submitBtn.addEventListener('click', function(e){
+  e.preventDefault();
+  getLink();
+});
 
 function getLink(){
-    xhr.open('GET', '/links');
-    xhr.send();
-    xhr.onreadystatechange = function(){
-      if (xhr.readyState === 4){
-        console.log(xhr.responseText);
-      }
-    };
+  var request = $.ajax({
+    url: '/links',
+    type: 'POST',
+    data: {
+      customizr: customizr.value,
+      input_url: inputUrl.value
+    },
+    dataType: 'json'
+  })
+  .done(function(data){
+    console.log(data);
+    inputUrl = '';
+    customizr = '';
+  })
+  .fail(function(jqXHR, textStatus) {
+    alert( "Request failed: " + textStatus );
+  });
 }
