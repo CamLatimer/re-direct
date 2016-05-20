@@ -19,8 +19,8 @@ function getLink(){
   })
   .done(function(data){
     console.log(data);
-    inputUrl = '';
-    customizr = '';
+    inputUrl.value = '';
+    customizr.value = '';
   })
   .fail(function(reqObj, textStatus) {
     console.log(reqObj.status)
